@@ -68,7 +68,9 @@ namespace SkalProj_Datastrukturer_Minne
             */
 
             bool quit = false;
+            const string subMenu = "'+' add, '-' remove, 'q' quit.";
             List<string> theList = new List<string>();
+            Console.WriteLine(subMenu);
 
             do {
                 string input = Console.ReadLine();
@@ -92,10 +94,13 @@ namespace SkalProj_Datastrukturer_Minne
                     default:
                         break;
                 }
+
+                // present result
                 foreach (string str in theList) {
                     Console.Write($"{str} ");
                 }
                 Console.WriteLine();
+
             } while (quit == false);
         }
 
