@@ -133,6 +133,34 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
+            Stack<Char> lParen = new Stack<Char>();
+            Stack<Char> rParen = new Stack<Char>();
+            string str = Console.ReadLine();
+
+            foreach(char c in str) {
+                switch (c) {
+                    case '(':
+                    case '{':
+                    case '[':
+                    case '<':
+                        lParen.Push(c);
+                        Console.Write(c);
+                        break;
+
+                    case ')':
+                    case '}':
+                    case ']':
+                    case '>':
+                        rParen.Push(c);
+                        Console.Write(c);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            Console.WriteLine();
+
         }
 
     }
