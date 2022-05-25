@@ -134,33 +134,45 @@ namespace SkalProj_Datastrukturer_Minne
              */
 
             Stack<Char> lParen = new Stack<Char>();
-            Stack<Char> rParen = new Stack<Char>();
             string str = Console.ReadLine();
 
-            foreach(char c in str) {
+            foreach (char c in str) {
                 switch (c) {
                     case '(':
                     case '{':
                     case '[':
                     case '<':
                         lParen.Push(c);
-                        Console.Write(c);
                         break;
 
                     case ')':
+                        // expect '('
+                        Char paren = lParen.Pop();
+                        if(paren != '(') Console.WriteLine($"\')\' does not match \'{paren}\'");
+                        break;
+
                     case '}':
+                        // expect '{'
+                        paren = lParen.Pop();
+                        if (paren != '{') Console.WriteLine($"\'}}\' does not match \'{paren}\'");
+                        break;
+
                     case ']':
+                        // expect '['
+                        paren = lParen.Pop();
+                        if (paren != '[') Console.WriteLine($"\']\' does not match \'{paren}\'");
+                        break;
+
                     case '>':
-                        rParen.Push(c);
-                        Console.Write(c);
+                        // expect '<'
+                        paren = lParen.Pop();
+                        if (paren != '<') Console.WriteLine($"\'>\' does not match \'{paren}\'");
                         break;
 
                     default:
                         break;
                 }
             }
-            Console.WriteLine();
-
         }
 
     }
