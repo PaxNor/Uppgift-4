@@ -134,9 +134,9 @@ namespace SkalProj_Datastrukturer_Minne
              */
 
             Stack<Char> lParen = new Stack<Char>();
-            string str = Console.ReadLine();
+            string input = Console.ReadLine();
 
-            foreach (char c in str) {
+            foreach (char c in input) {
                 switch (c) {
                     case '(':
                     case '{':
@@ -148,30 +148,33 @@ namespace SkalProj_Datastrukturer_Minne
                     case ')':
                         // expect '('
                         Char paren = lParen.Pop();
-                        if(paren != '(') Console.WriteLine($"\')\' does not match \'{paren}\'");
+                        if (paren != '(') Console.WriteLine($"Error: \'{paren}\' does not match \')\'");
                         break;
 
                     case '}':
                         // expect '{'
                         paren = lParen.Pop();
-                        if (paren != '{') Console.WriteLine($"\'}}\' does not match \'{paren}\'");
+                        if (paren != '{') Console.WriteLine($"Error: \'{paren}\' does not match \'}}\'");
                         break;
 
                     case ']':
                         // expect '['
                         paren = lParen.Pop();
-                        if (paren != '[') Console.WriteLine($"\']\' does not match \'{paren}\'");
+                        if (paren != '[') Console.WriteLine($"Error: \'{paren}\' does not match \']\'");
                         break;
 
                     case '>':
                         // expect '<'
                         paren = lParen.Pop();
-                        if (paren != '<') Console.WriteLine($"\'>\' does not match \'{paren}\'");
+                        if (paren != '<') Console.WriteLine($"Error: \'{paren}\' does not match \'>\'");
                         break;
 
                     default:
                         break;
                 }
+            }
+            if (lParen.Count != 0) {
+                Console.WriteLine("Unbalanced parenthesis");
             }
         }
 
