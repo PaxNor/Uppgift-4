@@ -133,7 +133,7 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
-            Stack<Char> lParen = new Stack<Char>();
+            Stack<Char> lParens = new Stack<Char>();
             string input = Console.ReadLine();
 
             foreach (char c in input) {
@@ -142,41 +142,50 @@ namespace SkalProj_Datastrukturer_Minne
                     case '{':
                     case '[':
                     case '<':
-                        lParen.Push(c);
+                        lParens.Push(c);
                         break;
 
                     case ')':
-                        // expect '('
-                        Char paren = lParen.Pop();
-                        if (paren != '(') Console.WriteLine($"Error: \'{paren}\' does not match \')\'");
+                        MatchAndReport(lParens, expected: '(', c);
                         break;
 
                     case '}':
-                        // expect '{'
-                        paren = lParen.Pop();
-                        if (paren != '{') Console.WriteLine($"Error: \'{paren}\' does not match \'}}\'");
+                        MatchAndReport(lParens, expected: '{', c);
                         break;
 
                     case ']':
-                        // expect '['
-                        paren = lParen.Pop();
-                        if (paren != '[') Console.WriteLine($"Error: \'{paren}\' does not match \']\'");
+                        MatchAndReport(lParens, expected: '[', c);
                         break;
 
                     case '>':
-                        // expect '<'
-                        paren = lParen.Pop();
-                        if (paren != '<') Console.WriteLine($"Error: \'{paren}\' does not match \'>\'");
-                        break;
-
-                    default:
+                        MatchAndReport(lParens, expected: '<', c);
                         break;
                 }
             }
-            if (lParen.Count != 0) {
-                Console.WriteLine("Unbalanced parenthesis");
+
+            if (lParens.Count != 0) {
+
+                while(lParens.Count != 0) {
+                    Char p = lParens.Pop();
+                    Console.WriteLine($"Error: no matching closing parenthesis to \'{p}\'");
+                }
             }
         }
+
+        // helper function, testing and reporting
+        private static void MatchAndReport(Stack<Char> lParens, Char expected, Char closing) {
+
+            if (lParens.Count == 0) {
+                Console.WriteLine($"Error: no matching \'{expected}\' found");
+            }
+            else {
+                Char paren = lParens.Pop();
+                if (paren != expected) {
+                    Console.WriteLine($"Error: \'{paren}\' does not match \'{closing}\'");
+                }
+            }
+        }
+
 
     }
 }
