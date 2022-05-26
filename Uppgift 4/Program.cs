@@ -163,6 +163,46 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+
+            bool quit = false;
+            const string subMenu = "'+' push, '-' pop, 'q' quit.";
+            Stack<string> theStack = new Stack<string>();
+            Console.WriteLine(subMenu);
+
+            do {
+                string input = Console.ReadLine();
+                char nav = input[0];
+                string value = input.Substring(1);
+
+                switch (nav) {
+
+                    case '+':
+                        theStack.Push(value);
+                        break;
+
+                    case '-':
+                        if (theStack.Count > 0) {
+                            theStack.Pop();
+                        }
+                        break;
+
+                    case 'q':
+                        quit = true;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                // present result
+                foreach (string str in theStack) {
+                    Console.Write($"{str} ");
+                }
+                Console.WriteLine();
+
+            } while (quit == false);
+
+
         }
 
         static void CheckParanthesis() {
