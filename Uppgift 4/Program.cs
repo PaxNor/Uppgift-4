@@ -244,7 +244,7 @@ namespace SkalProj_Datastrukturer_Minne
 
             if (lParens.Count != 0) {
 
-                while(lParens.Count != 0) {
+                while (lParens.Count != 0) {
                     Char p = lParens.Pop();
                     Console.WriteLine($"Error: no matching closing parenthesis to \'{p}\'");
                 }
