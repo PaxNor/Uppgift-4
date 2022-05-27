@@ -12,13 +12,12 @@ namespace Uppgift_4
         private Stack<Char> lParans;
         private string input;
 
-        public ParanParser(string input) {
-            this.input = input;
+        public ParanParser() {
             report = new List<string>();
             lParans = new Stack<char>();
         }
 
-        public List<string> Parse() {
+        private List<string> Parse() {
 
             foreach (char c in input) {
                 switch (c) {

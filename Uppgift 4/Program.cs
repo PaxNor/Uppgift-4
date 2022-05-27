@@ -215,13 +215,12 @@ namespace SkalProj_Datastrukturer_Minne
 
             string input = "";
             List<string> report;
-            ParanParser parser;
+            ParanParser parser = new ParanParser();
 
             Console.Write("Enter paranthesis: ");
             input = Console.ReadLine();
 
-            parser = new ParanParser(input);
-            report = parser.Parse();
+            report = parser.Parse(input);
 
             foreach(string remark in report) {
                 Console.WriteLine(remark);
