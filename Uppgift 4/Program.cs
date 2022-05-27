@@ -1,4 +1,5 @@
 ﻿using System;
+using Uppgift_4;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -212,60 +213,21 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
-            Stack<Char> lParens = new Stack<Char>();
-            string input = Console.ReadLine();
+            string input = "";
+            List<string> report;
+            ParanParser parser;
 
-            foreach (char c in input) {
-                switch (c) {
-                    case '(':
-                    case '{':
-                    case '[':
-                    case '<':
-                        lParens.Push(c);
-                        break;
+            Console.Write("Enter paranthesis: ");
+            input = Console.ReadLine();
 
-                    case ')':
-                        MatchAndReport(lParens, expected: '(', c);
-                        break;
+            parser = new ParanParser(input);
+            report = parser.Parse();
 
-                    case '}':
-                        MatchAndReport(lParens, expected: '{', c);
-                        break;
-
-                    case ']':
-                        MatchAndReport(lParens, expected: '[', c);
-                        break;
-
-                    case '>':
-                        MatchAndReport(lParens, expected: '<', c);
-                        break;
-                }
+            foreach(string remark in report) {
+                Console.WriteLine(remark);
             }
 
-            if (lParens.Count != 0) {
-
-                while (lParens.Count != 0) {
-                    Char p = lParens.Pop();
-                    Console.WriteLine($"Error: no matching closing parenthesis to \'{p}\'");
-                }
-            }
         }
-
-        // helper function, testing and reporting
-        private static void MatchAndReport(Stack<Char> lParens, Char expected, Char closing) {
-
-            if (lParens.Count == 0) {
-                Console.WriteLine($"Error: no matching \'{expected}\' found");
-            }
-            else {
-                Char paren = lParens.Pop();
-                if (paren != expected) {
-                    Console.WriteLine($"Error: \'{paren}\' does not match \'{closing}\'");
-                }
-            }
-        }
-
-
     }
 }
 
